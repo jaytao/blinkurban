@@ -55,6 +55,11 @@
             <artifactId>objectify</artifactId>
             <version>5.0</version>
         </dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.52</version>
+		</dependency>
 
         <!-- Test Dependencies -->
         <dependency>

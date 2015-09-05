@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/PikQbYs-fFiNmznRc6pRlo1VjgM\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/ULlGNVo12ZXT06UWy_h2KLreujI\"",
  "discoveryVersion": "v1",
  "id": "blinkurban:v1",
  "name": "blinkurban",
@@ -11,9 +11,9 @@
   "x32": "http://www.google.com/images/icons/product/search-32.gif"
  },
  "protocol": "rest",
- "baseUrl": "https://open-world-talk.appspot.com/_ah/api/blinkurban/v1/",
+ "baseUrl": "https://blink-urban.appspot.com/_ah/api/blinkurban/v1/",
  "basePath": "/_ah/api/blinkurban/v1/",
- "rootUrl": "https://open-world-talk.appspot.com/_ah/api/",
+ "rootUrl": "https://blink-urban.appspot.com/_ah/api/",
  "servicePath": "blinkurban/v1/",
  "batchPath": "batch",
  "parameters": {
@@ -71,18 +71,6 @@
   }
  },
  "schemas": {
-  "Gender": {
-   "id": "Gender",
-   "type": "string",
-   "enum": [
-    "Female",
-    "Male"
-   ],
-   "enumDescriptions": [
-    "",
-    ""
-   ]
-  },
   "User": {
    "id": "User",
    "type": "object",
@@ -93,13 +81,7 @@
     "firstName": {
      "type": "string"
     },
-    "gender": {
-     "$ref": "Gender"
-    },
     "lastName": {
-     "type": "string"
-    },
-    "password": {
      "type": "string"
     }
    }
@@ -117,10 +99,23 @@
     "firstName": {
      "type": "string"
     },
-    "gender": {
-     "$ref": "Gender"
+    "genderID": {
+     "type": "string",
+     "format": "int64"
     },
     "lastName": {
+     "type": "string"
+    },
+    "password": {
+     "type": "string"
+    }
+   }
+  },
+  "UserLoginForm": {
+   "id": "UserLoginForm",
+   "type": "object",
+   "properties": {
+    "email": {
      "type": "string"
     },
     "password": {
@@ -136,6 +131,21 @@
    "httpMethod": "POST",
    "request": {
     "$ref": "UserForm",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "User"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "login": {
+   "id": "blinkurban.login",
+   "path": "login",
+   "httpMethod": "POST",
+   "request": {
+    "$ref": "UserLoginForm",
     "parameterName": "resource"
    },
    "response": {

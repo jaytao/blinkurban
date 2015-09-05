@@ -1,5 +1,9 @@
 package com.blinkurban.backend.service;
 
+import com.blinkurban.backend.domain.Gender;
+import com.blinkurban.backend.domain.Item;
+import com.blinkurban.backend.domain.Order;
+import com.blinkurban.backend.domain.OrderItems;
 import com.blinkurban.backend.domain.User;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
@@ -14,6 +18,10 @@ public class OfyService {
      */
     static {
         factory().register(User.class);
+        factory().register(Gender.class);
+        factory().register(Item.class);
+        factory().register(Order.class);
+        factory().register(OrderItems.class);
     }
 
     /**

@@ -7,17 +7,17 @@ public class UserForm {
 	private String confirmPassword;
 	private String firstName;
 	private String lastName;
-	private Gender gender;
+	private long genderID;
 	
 	private UserForm(){}
 	
-	public UserForm(String email, String password, String confirmPassword, String firstName, String lastName, Gender gender){
+	public UserForm(String email, String password, String confirmPassword, String firstName, String lastName, long genderID){
 		this.email = email;
 		this.password = password;
-		this.confirmPassword = password;
+		this.confirmPassword = confirmPassword;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.gender = gender;
+		this.genderID = genderID;
 	}
 	
 	public String getConfirmPassword() {
@@ -40,12 +40,8 @@ public class UserForm {
 		return lastName;
 	}
 	
-	public Gender getGender() {
-		return gender;
+	public long getGenderID() {
+		return genderID;
 	}
 
-	public static enum Gender {
-    	Male,
-        Female
-    }
 }
