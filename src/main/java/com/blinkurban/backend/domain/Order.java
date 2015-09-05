@@ -9,8 +9,9 @@ import com.googlecode.objectify.annotation.Id;
 @Entity
 public class Order{
 	@Id private long id;
+	
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	Key<User> user;
+	private Key<User> userID;
 	
 	public Order(){}
 	

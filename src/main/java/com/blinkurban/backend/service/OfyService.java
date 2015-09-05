@@ -1,9 +1,14 @@
 package com.blinkurban.backend.service;
 
+import com.blinkurban.backend.domain.Category;
+import com.blinkurban.backend.domain.Color;
 import com.blinkurban.backend.domain.Gender;
 import com.blinkurban.backend.domain.Item;
+import com.blinkurban.backend.domain.Model;
 import com.blinkurban.backend.domain.Order;
 import com.blinkurban.backend.domain.OrderItems;
+import com.blinkurban.backend.domain.Picture;
+import com.blinkurban.backend.domain.Size;
 import com.blinkurban.backend.domain.User;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
@@ -22,6 +27,11 @@ public class OfyService {
         factory().register(Item.class);
         factory().register(Order.class);
         factory().register(OrderItems.class);
+        factory().register(Category.class);
+        factory().register(Color.class);
+        factory().register(Model.class);
+        factory().register(Size.class);
+        factory().register(Picture.class);
     }
 
     /**

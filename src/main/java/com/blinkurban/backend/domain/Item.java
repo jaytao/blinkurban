@@ -12,7 +12,7 @@ public class Item {
 	private String name;
 	private String description;
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	Key<Gender> gender;
+	Key<Gender> genderID;
 	
 	private Item(){}
 	

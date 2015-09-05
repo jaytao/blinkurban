@@ -10,19 +10,19 @@ import com.googlecode.objectify.annotation.Id;
 @Entity
 public class User {
 	@Id String email;
-	byte[] password;
-	String salt;
-	String firstName;
-	String lastName;
+	private byte[] password;
+	private String salt;
+	private String firstName;
+	private String lastName;
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	Key<Gender> gender;
+	private Key<Gender> genderID;
 	
 	public User(String email, byte[] password, String firstName, String lastName, long genderID, String salt){
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.gender = Key.create(Gender.class, genderID);
+		this.genderID = Key.create(Gender.class, genderID);
 		this.salt = salt;
 	}
 	
@@ -48,7 +48,7 @@ public class User {
 		return lastName;
 	}
 	
-	public Key<Gender> getGender() {
-		return gender;
+	public Key<Gender> getGenderID() {
+		return genderID;
 	}
 }
