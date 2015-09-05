@@ -27,7 +27,7 @@ public class User {
 	}
 	
 	private User(){}
-	
+	 
 	public String getEmail() {
 		return email;
 	}
