@@ -62,21 +62,7 @@ public class BlinkUrbanAPI {
 	
 	@ApiMethod(name = "login", path = "login", httpMethod = HttpMethod.POST)
 	public User login(UserLoginForm loginForm) throws BadRequestException, UnauthorizedException{
-		if (!Regex.email(loginForm.getEmail())){
-			// Save the entity in the datastore
-			//throw new BadRequestException("gID = " + userForm.getGender());
-			throw new BadRequestException("Invalid email address");
-		}
-		User user = ofy().load().key(Key.create(User.class, loginForm.getEmail())).now();
-		if (user == null){
-			throw new UnauthorizedException("Email or Password incorrect.");
-		}
-		else if (!user.checkPassword(loginForm.getPassword())){
-			throw new UnauthorizedException("Email or Password incorrect.");
-		}
-		else{
-			return user;
-		}
+		return Login.login(loginForm);
 	}
 	
 }

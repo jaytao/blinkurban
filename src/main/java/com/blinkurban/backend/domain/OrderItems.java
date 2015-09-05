@@ -9,8 +9,13 @@ import com.googlecode.objectify.annotation.Id;
 @Entity
 public class OrderItems{
 	@Id private long id;
+	private int quantity;
+	
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	Key<Order> order;
+	private Key<Order> orderID;
+	
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	Key<Item> item;
+	private Key<Item> itemID;
+	
+	public OrderItems(){}
 }

@@ -4,17 +4,11 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 @Entity
-public class Gender{
+public class Model{
 	@Id private long id;
-	private String gender;
+	private String name;
+	private int height;
+	private int weight;
 	
-	private Gender(){}
-	
-	public long getId() {
-		return id;
-	}
-	
-	public String getGender() {
-		return gender;
-	}
+	public Model(){}
 }
