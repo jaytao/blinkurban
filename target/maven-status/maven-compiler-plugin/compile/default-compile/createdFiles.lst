@@ -1,0 +1,8 @@
+com/blinkurban/backend/service/OfyService.class
+com/blinkurban/backend/form/UserForm$Gender.class
+com/blinkurban/backend/Constants.class
+com/blinkurban/backend/form/UserForm.class
+com/blinkurban/backend/domain/Item.class
+com/blinkurban/backend/domain/User.class
+com/blinkurban/backend/spi/BlinkUrbanAPI.class
+com/blinkurban/backend/form/UserLoginForm.class
