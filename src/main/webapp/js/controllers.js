@@ -48,3 +48,7 @@ blinkUrbanApp.controllers.controller('RootCtrl', function ($scope, $location) {
 
 });
 
+blinkUrbanApp.controllers.controller('LoginCtrl', function($scope){
+	
+});
+
