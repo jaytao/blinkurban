@@ -8,7 +8,7 @@ import com.googlecode.objectify.annotation.Id;
 
 @Entity
 public class Picture{
-	@Id private long id;
+	@Id private Long id;
 	private byte[] file;
 	
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)

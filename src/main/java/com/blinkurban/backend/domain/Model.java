@@ -5,7 +5,7 @@ import com.googlecode.objectify.annotation.Id;
 
 @Entity
 public class Model{
-	@Id private long id;
+	@Id private Long id;
 	private String name;
 	private int height;
 	private int weight;

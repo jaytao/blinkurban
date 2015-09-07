@@ -34,7 +34,7 @@ public class Register {
 			// TODO hash and salt password
 
 			user = new User(userForm.getEmail(), Crypto.SHA256(Constants.SALT + userForm.getPassword()),
-					userForm.getFirstName(), userForm.getLastName(), userForm.getGenderID(), Constants.SALT);
+					userForm.getFirstName(), userForm.getLastName(), userForm.getGender(), Constants.SALT);
 
 			ofy().save().entity(user).now();
 		} else {

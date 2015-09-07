@@ -6,7 +6,9 @@ import com.google.api.server.spi.config.ApiResourceProperty;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
+import static com.blinkurban.backend.service.OfyService.ofy;
 @Entity
 public class User {
 	@Id String email;
@@ -14,15 +16,17 @@ public class User {
 	private String salt;
 	private String firstName;
 	private String lastName;
-	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
-	private Key<Gender> genderID;
 	
-	public User(String email, byte[] password, String firstName, String lastName, long genderID, String salt){
+	@ApiResourceProperty
+	@Index 
+	private Gender gender;
+	
+	public User(String email, byte[] password, String firstName, String lastName, String gender, String salt){
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.genderID = Key.create(Gender.class, genderID);
+		this.gender = Gender.valueOf(gender);
 		this.salt = salt;
 	}
 	
@@ -48,7 +52,7 @@ public class User {
 		return lastName;
 	}
 	
-	public Key<Gender> getGenderID() {
-		return genderID;
+	public Gender getGender() {
+		return gender;
 	}
 }

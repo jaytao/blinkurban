@@ -4,6 +4,7 @@ import com.blinkurban.backend.domain.Category;
 import com.blinkurban.backend.domain.Color;
 import com.blinkurban.backend.domain.Gender;
 import com.blinkurban.backend.domain.Item;
+import com.blinkurban.backend.domain.ItemMetric;
 import com.blinkurban.backend.domain.Model;
 import com.blinkurban.backend.domain.Order;
 import com.blinkurban.backend.domain.OrderItems;
@@ -23,15 +24,12 @@ public class OfyService {
      */
     static {
         factory().register(User.class);
-        factory().register(Gender.class);
         factory().register(Item.class);
         factory().register(Order.class);
         factory().register(OrderItems.class);
-        factory().register(Category.class);
-        factory().register(Color.class);
         factory().register(Model.class);
-        factory().register(Size.class);
         factory().register(Picture.class);
+        factory().register(ItemMetric.class);
     }
 
     /**

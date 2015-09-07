@@ -7,17 +7,17 @@ public class UserForm {
 	private String confirmPassword;
 	private String firstName;
 	private String lastName;
-	private long genderID;
+	private String gender;
 	
 	private UserForm(){}
 	
-	public UserForm(String email, String password, String confirmPassword, String firstName, String lastName, long genderID){
+	public UserForm(String email, String password, String confirmPassword, String firstName, String lastName, String gender){
 		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.genderID = genderID;
+		this.gender = gender;
 	}
 	
 	public String getConfirmPassword() {
@@ -40,8 +40,8 @@ public class UserForm {
 		return lastName;
 	}
 	
-	public long getGenderID() {
-		return genderID;
+	public String getGender() {
+		return gender;
 	}
 
 }
