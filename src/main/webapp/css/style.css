@@ -1,3 +1,9 @@
+* {
+	webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -44,3 +50,13 @@ p, a, h4 {
     font-style: normal;
     font-weight: normal;
 }
+
+/*changing color of form fields to indicate validation result*/
+.ng-invalid.ng-touched{
+ border-color:red; 
+}
+.ng-valid.ng-touched{
+ border-color: green; 
+}
+
+	
