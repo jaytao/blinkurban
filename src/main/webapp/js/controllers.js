@@ -50,7 +50,15 @@ blinkUrbanApp.controllers.controller('RootCtrl', function ($scope, $location) {
 
 blinkUrbanApp.controllers.controller('LoginCtrl', function($scope){
 	$scope.login = function(user){
-		
+		$scope.loading = true;
+		gapi.client.blinkurban.login(user).execute(function (resp) {
+			$scope.loading = false;
+			if (resp.error) {
+                // The request has failed.
+			}else{
+				// The request has succeeded.
+			}
+        });
 	};
 });
 
