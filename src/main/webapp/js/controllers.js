@@ -56,6 +56,8 @@ blinkUrbanApp.controllers.controller('LoginCtrl', function($scope, $rootScope){
 	
 	$scope.init = function(){
 		$scope.loading = false;
+		$scope.account = {};
+		$scope.genders = ["Male", "Female"];
 	};
 	
 	$scope.login = function(user){
@@ -73,9 +75,9 @@ blinkUrbanApp.controllers.controller('LoginCtrl', function($scope, $rootScope){
         });
 	};
 	
-	$scope.createUser = function(user){
+	$scope.createUser = function(account){
 		$scope.loading = true;
-		gapi.client.blinkurban.createUser(user).execute(function (resp) {
+		gapi.client.blinkurban.createUser(account).execute(function (resp) {
 			$scope.loading = false;
 			if (resp.error) {
                 // The request has failed.

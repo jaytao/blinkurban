@@ -82,6 +82,15 @@
 					    	<span ng-show="createUserForm.userConfirmPassword.$error.required">Please confirm your password</span>
 					    </div>
 	        		</div>
+	        		<div class="form-group">
+	        			<label for="userGender" class="sr-only">GENDER</label>
+	        			<select ng-model="account.gender" ng-options="gender for gender in genders" id="userGender" name="userGender" class="form-control" required>
+	        				<option value="">SELECT GENDER *</option> 
+	        			</select>
+	        			<div ng-show="createUserForm.$submitted || createUserForm.userGender.$touched">
+					    	<span ng-show="createUserForm.userGender.$error.required">Please select a gender</span>
+					    </div>
+	        		</div>
 	    			<button class="btn btn-primary btn-block" type="submit">CREATE ACCOUNT</button>
 	    		</form>
 	    	</div>

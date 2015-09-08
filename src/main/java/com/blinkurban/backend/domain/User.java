@@ -17,12 +17,12 @@ public class User {
 	@Index 
 	private Gender gender;
 	
-	public User(String email, byte[] password, String firstName, String lastName, String gender, String salt){
+	public User(String email, byte[] password, String firstName, String lastName, Gender gender, String salt){
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.gender = Gender.valueOf(gender);
+		this.gender = gender;
 		this.salt = salt;
 	}
 	

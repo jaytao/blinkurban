@@ -1,5 +1,7 @@
 package com.blinkurban.backend.form;
 
+import com.blinkurban.backend.domain.Gender;
+
 public class UserForm {
 
 	private String email;
@@ -7,11 +9,11 @@ public class UserForm {
 	private String confirmPassword;
 	private String firstName;
 	private String lastName;
-	private String gender;
+	private Gender gender;
 	
 	private UserForm(){}
 	
-	public UserForm(String email, String password, String confirmPassword, String firstName, String lastName, String gender){
+	public UserForm(String email, String password, String confirmPassword, String firstName, String lastName, Gender gender){
 		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
@@ -40,7 +42,7 @@ public class UserForm {
 		return lastName;
 	}
 	
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
