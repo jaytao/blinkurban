@@ -19,9 +19,11 @@ public class ItemMetric{
 	Key<Item> itemID;
 	
 	@ApiResourceProperty
+	@Index
 	Size size;
 	
 	@ApiResourceProperty
+	@Index
 	Color color;
 	
 	public ItemMetric(){}

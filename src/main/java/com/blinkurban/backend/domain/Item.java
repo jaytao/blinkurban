@@ -14,16 +14,18 @@ public class Item {
 	private Long id;
 	private String name;
 	private String description;
+	private double price;
 	
 	@ApiResourceProperty
 	@Index
 	Gender gender;
 
 	private Item(){}
-	public Item(String name, String description, String gender){
+	public Item(String name, String description, String gender, double price){
 		this.name = name;
 		this.description = description;
 		this.gender = Gender.valueOf(gender);
+		this.price = price;
 	}
 	public String getName(){
 		return name;
@@ -35,5 +37,8 @@ public class Item {
 	
 	public Gender getGender(){
 		return gender;
+	}
+	public double getPrice(){
+		return price;
 	}
 }

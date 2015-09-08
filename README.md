@@ -1,6 +1,4 @@
 
-A "hello world" application for Google Cloud Endpoints in Java.
-
 ## Products
 - [App Engine][1]
 

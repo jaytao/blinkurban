@@ -9,7 +9,7 @@ import com.googlecode.objectify.Key;
 
 public class Items{
 	public static Item createItem(ItemForm item){
-		Item i = new Item(item.getName(), item.getDescription(), item.getGender());
+		Item i = new Item(item.getName(), item.getDescription(), item.getGender(), item.getPrice());
 		ofy().save().entity(i).now();
 		return i;
 	}

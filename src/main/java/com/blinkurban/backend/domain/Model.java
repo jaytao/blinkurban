@@ -9,6 +9,36 @@ public class Model{
 	private String name;
 	private int height;
 	private int weight;
+	private String description;
 	
 	public Model(){}
+	
+	public Model(String name, String description, int height, int weight){
+		this.name = name;
+		this.description = description;
+		this.height = height;
+		this.weight = weight;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+	
+	
 }

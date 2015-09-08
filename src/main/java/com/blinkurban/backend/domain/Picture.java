@@ -10,8 +10,9 @@ import com.googlecode.objectify.annotation.Id;
 public class Picture{
 	@Id private Long id;
 	private byte[] file;
+	private Key<Item> item;
 	
-	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	@ApiResourceProperty
 	private Key<Model> modelID;
 	
 	public Picture(){}

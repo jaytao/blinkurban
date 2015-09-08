@@ -7,13 +7,14 @@ import com.blinkurban.backend.domain.Item;
 import com.blinkurban.backend.domain.ItemMetric;
 import com.blinkurban.backend.domain.Model;
 import com.blinkurban.backend.domain.Order;
-import com.blinkurban.backend.domain.OrderItems;
+import com.blinkurban.backend.domain.OrderItem;
 import com.blinkurban.backend.domain.Picture;
 import com.blinkurban.backend.domain.Size;
 import com.blinkurban.backend.domain.User;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.impl.translate.opt.joda.JodaTimeTranslators;
 
 /**
  * Custom Objectify Service that this application should use.
@@ -26,7 +27,7 @@ public class OfyService {
         factory().register(User.class);
         factory().register(Item.class);
         factory().register(Order.class);
-        factory().register(OrderItems.class);
+        factory().register(OrderItem.class);
         factory().register(Model.class);
         factory().register(Picture.class);
         factory().register(ItemMetric.class);
