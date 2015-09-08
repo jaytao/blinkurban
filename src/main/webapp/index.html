@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="blinkUrbanApp">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,6 +31,7 @@
          */
         function init() {
             gapi.client.load('blinkurban', 'v1', null, '//' + window.location.host + '/_ah/api');
+            angular.bootstrap(document, ['blinkUrbanApp']);
         };
     </script>
     <script src="//apis.google.com/js/client:plusone.js?onload=init"></script>
@@ -71,6 +72,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
           	<li><a href="#/login">LOG IN/ REGISTER</a></li>
+          	<li><a href="#/login">LOG OUT</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

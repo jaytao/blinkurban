@@ -28,7 +28,6 @@ blinkUrbanApp.controllers = angular.module('blinkUrbanControllers', ['ui.bootstr
  *
  */
 blinkUrbanApp.controllers.controller('RootCtrl', function ($scope, $location) {
-
     /**
      * Returns if the viewLocation is the currently viewed page.
      *
@@ -45,20 +44,49 @@ blinkUrbanApp.controllers.controller('RootCtrl', function ($scope, $location) {
     $scope.collapseNavbar = function () {
         angular.element(document.querySelector('.navbar-collapse')).removeClass('in');
     };
+    
+    $scope.getSignedInState = function () {
+        
+    };
 
 });
 
-blinkUrbanApp.controllers.controller('LoginCtrl', function($scope){
+blinkUrbanApp.controllers.controller('LoginCtrl', function($scope, $rootScope){
+	
+	
+	$scope.init = function(){
+		$scope.loading = false;
+	};
+	
 	$scope.login = function(user){
 		$scope.loading = true;
 		gapi.client.blinkurban.login(user).execute(function (resp) {
 			$scope.loading = false;
 			if (resp.error) {
                 // The request has failed.
+				var errorMessage = resp.error.message || '';
+				$scope.messages = 'Failed to login: ' + errorMessage;
+				$scope.alertStatus = 'danger';
 			}else{
 				// The request has succeeded.
 			}
         });
 	};
+	
+	$scope.createUser = function(user){
+		$scope.loading = true;
+		gapi.client.blinkurban.createUser(user).execute(function (resp) {
+			$scope.loading = false;
+			if (resp.error) {
+                // The request has failed.
+				var errorMessage = resp.error.message || '';
+				$scope.messages = 'Failed to create an account: ' + errorMessage;
+				$scope.alertStatus = 'danger';
+			}else{
+				// The request has succeeded.
+			}
+        });
+	};
+	
 });
 

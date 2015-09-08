@@ -1,11 +1,20 @@
-<div class="row">
+<div class="row" ng-controller="LoginCtrl" ng-init="init()">
 	<div class="col-sm-6 border-right">
     	<div class="col-xs-12 col-md-6 col-md-offset-3 content-block">
-    		<form name="loginForm" novalidate ng-submit="loginForm.$valid && login(user)">
+    		<div class="row">
+		        <div class="col-xs-12">
+		            <div id="messages" class="alert alert-{{alertStatus}}" ng-show="messages">
+		                <span ng-bind="messages"></span>
+		                <i class="dismiss-messages pull-right glyphicon glyphicon-remove" ng-click="messages = ''" ng-show="messages"></i>
+		            </div>
+		            <img class="spinner" src="/img/ajax-loader.gif" ng-show="loading"/>
+		        </div>
+		    </div>
+    		<form name="loginForm" novalidate ng-submit="!loading && loginForm.$valid && login(user)">
         		<h4>EXISTING CUSTOMERS</h4>
         		<div class="form-group">
         			<label for="userEmail" class="sr-only">EMAIL ADDRESS</label>
-        			<input ng-model="user.email" name="userEmail" type="email" id="userEmail" class="form-control" placeholder="EMAIL ADDRESS" required autofocus>
+        			<input ng-model="user.email" name="userEmail" type="email" id="userEmail" class="form-control" placeholder="EMAIL ADDRESS" required>
         			<div ng-show="loginForm.$submitted || loginForm.userEmail.$touched">
 				    	<span ng-show="loginForm.userEmail.$error.required || loginForm.userEmail.$error.email">Please enter a valid email address</span>
 				    </div>
@@ -28,9 +37,54 @@
  	</div>
     
     <div class="col-sm-6">
-    	<div class="col-xs-12  col-xs-offset-1 content-block">
-    		<h4>DON'T HAVE AN ACCOUNT?</h4>
-		   	<button class="btn btn-primary" type="submit">CREATE ACCOUNT</button>
+    	<div class="col-xs-8  col-xs-offset-1 content-block">
+    		<div ng-hide="createAccount">
+    			<h4>DON'T HAVE AN ACCOUNT?</h4>
+		   		<button ng-click="createAccount = true" class="btn btn-primary" type="submit">CREATE ACCOUNT</button>
+    		</div>
+		   	<div ng-show="createAccount">
+	    		<form name="createUserForm" novalidate ng-submit="createUserForm.$valid && createUser(account)">
+	    			<h4>CREATE AN ACCOUNT</h4>
+	    			<h5><small>CREATE AN ACCOUNT TO SEE YOUR PURCHASE HISTORY, CHECKOUT FASTER AND MORE.</small></h5>
+	    			<h6 class="pull-right"><small>* REQUIRED FIELD</small></h6>
+	    			<div class="form-group">
+	        			<label for="firstName" class="sr-only">FIRST NAME</label>
+	        			<input ng-model="account.firstName" name="firstName" type="text" id="firstName" class="form-control" placeholder="FIRST NAME *" required>
+	        			<div ng-show="createUserForm.$submitted || createUserForm.firstName.$touched">
+					    	<span ng-show="createUserForm.firstName.$error.required">Please enter a valid first name</span>
+					    </div>
+	        		</div>
+	        		<div class="form-group">
+	        			<label for="lastName" class="sr-only">LAST NAME</label>
+	        			<input ng-model="account.lastName" name="lastName" type="text" id="lastName" class="form-control" placeholder="LAST NAME *" required>
+	        			<div ng-show="createUserForm.$submitted || createUserForm.lastName.$touched">
+					    	<span ng-show="createUserForm.lastName.$error.required">Please enter a valid last name</span>
+					    </div>
+	        		</div>
+	    			<div class="form-group">
+	        			<label for="userEmail" class="sr-only">EMAIL ADDRESS</label>
+	        			<input ng-model="account.email" name="userEmail" type="email" id="userEmail" class="form-control" placeholder="EMAIL ADDRESS *" required>
+	        			<div ng-show="createUserForm.$submitted || createUserForm.userEmail.$touched">
+					    	<span ng-show="createUserForm.userEmail.$error.required || createUserForm.userEmail.$error.email">Please enter a valid email address</span>
+					    </div>
+	        		</div>
+	        		<div class="form-group">
+	        			<label for="userPassword" class="sr-only">PASSWORD</label>
+	        			<input ng-model="account.password" name="userPassword" type="password" id="userPassword" class="form-control" placeholder="PASSWORD *" required>
+	        			<div ng-show="createUserForm.$submitted || createUserForm.userPassword.$touched">
+					    	<span ng-show="createUserForm.userPassword.$error.required">Please enter your correct password</span>
+					    </div>
+	        		</div>
+	        		<div class="form-group">
+	        			<label for="userConfirmPassword" class="sr-only">CONFIRM PASSWORD</label>
+	        			<input ng-model="account.confirmPassword" name="userConfirmPassword" type="password" id="userConfirmPassword" class="form-control" placeholder="CONFIRM PASSWORD *" required>
+	        			<div ng-show="createUserForm.$submitted || createUserForm.userConfirmPassword.$touched">
+					    	<span ng-show="createUserForm.userConfirmPassword.$error.required">Please confirm your password</span>
+					    </div>
+	        		</div>
+	    			<button class="btn btn-primary btn-block" type="submit">CREATE ACCOUNT</button>
+	    		</form>
+	    	</div>
     	</div>
  	</div>
     
