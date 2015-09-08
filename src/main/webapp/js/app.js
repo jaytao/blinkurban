@@ -15,9 +15,13 @@ var app = angular.module('blinkUrbanApp', ['blinkUrbanControllers', 'ngRoute', '
     config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider.
-                when('/login', {
+                when('/account/login', {
                     templateUrl: '/html/login.html',
                     controller: 'LoginCtrl'
+                }).
+                when('/account/registration', {
+                    templateUrl: '/html/registration.html',
+                    controller: 'RegistrationCtrl'
                 }).
                 when('/', {
                     templateUrl: '/html/home.html'

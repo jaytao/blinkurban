@@ -53,11 +53,8 @@ blinkUrbanApp.controllers.controller('RootCtrl', function ($scope, $location) {
 
 blinkUrbanApp.controllers.controller('LoginCtrl', function($scope, $rootScope){
 	
-	
 	$scope.init = function(){
 		$scope.loading = false;
-		$scope.account = {};
-		$scope.genders = ["Male", "Female"];
 	};
 	
 	$scope.login = function(user){
@@ -73,6 +70,16 @@ blinkUrbanApp.controllers.controller('LoginCtrl', function($scope, $rootScope){
 				// The request has succeeded.
 			}
         });
+	};
+	
+});
+
+blinkUrbanApp.controllers.controller('RegistrationCtrl', function($scope, $rootScope){
+	
+	$scope.init = function(){
+		$scope.loading = false;
+		$scope.account = {};
+		$scope.genders = ["Male", "Female"];
 	};
 	
 	$scope.createUser = function(account){
@@ -91,4 +98,3 @@ blinkUrbanApp.controllers.controller('LoginCtrl', function($scope, $rootScope){
 	};
 	
 });
-

@@ -1,50 +1,61 @@
-<div class="row">
-            <div class="box">
-                <div class="col-md-4 col-md-offset-4">
-                    <form role="form">
-                        <div class="row">
-                            <h class="lead"><strong>Registration:</strong></h>
-                            <p class="text-right">*Not required<br><p>
-
-                            <div class="form-group">
-                              <input type="text" maxlenght="32" class="form-control" placeholder="First Name *">
-                            </div>
-                            
-                            <div class="form-group">
-                              <input type="text" maxlenght="32" class="form-control" placeholder="Last Name *">
-                            </div>
-                            
-                            <div class="form-group">
-                              <label class="control-label">*Gender:</label>
-                              <label class="radio-inline"><input type="radio" name="optradio">Male</label>
-                              <label class="radio-inline"><input type="radio" name="optradio">Female</label>
-                              <label class="radio-inline"><input type="radio" name="optradio">N/A</label>
-                            </div>
-                            
-                            <div class="form-group">
-                              <input type="text" maxlenght="32" class="form-control" placeholder="Email Address *">
-                            </div>
-                            
-                            <div class="form-group">
-                              <input type="text" maxlenght="32" class="form-control" placeholder="Password *">
-                            </div>
-                            
-                            <div class="form-group">
-                              <input type="text" maxlenght="32" class="form-control" placeholder="Confirm Password *">
-                            </div>
-                          
-                            <div class="checkbox">
-                               <label><input type="checkbox"> Please send me periodic newsletters</label>
-                            </div>
-
-                            <p href="#">By clicking submit, you agree to the Privacy Policy and Terms and Conditions</p>
-                            
-                            <div class="form-group col-md-12">
-                              <input type="hidden" name="save" value="contact">
-                              <button type="submit" class="btn btn-default">Submit</button>
-                            </div>
-                        </div>
-                     </form>
-                  </div>
-                <div class="clearfix"></div>
-            </div>
+<div ng-controller="RegistrationCtrl" ng-init="init()">
+	<div class="row">
+		<div class="col-xs-12 col-md-5">
+			<form name="createUserForm" novalidate ng-submit="createUserForm.$valid && createUser(account)">
+				<h4>CREATE AN ACCOUNT</h4>
+				<h5>
+					<small>CREATE AN ACCOUNT TO SEE YOUR PURCHASE HISTORY, CHECKOUT FASTER AND MORE.</small>
+				</h5>
+				<h6>
+					<small>ALREADY HAVE AN ACCOUNT?</small>
+					<a href="#/account/login"> LOG IN</a>
+				</h6>
+				<h6 class="pull-right">
+					<small>* REQUIRED FIELD</small>
+				</h6>
+				<div class="form-group">
+					<label for="firstName" class="sr-only">FIRST NAME</label> <input ng-model="account.firstName" name="firstName" type="text" id="firstName" class="form-control" placeholder="FIRST NAME *" required>
+					<div ng-show="createUserForm.$submitted || createUserForm.firstName.$touched">
+						<span ng-show="createUserForm.firstName.$error.required">Please enter a valid first name</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="lastName" class="sr-only">LAST NAME</label> <input ng-model="account.lastName" name="lastName" type="text" id="lastName" class="form-control" placeholder="LAST NAME *" required>
+					<div ng-show="createUserForm.$submitted || createUserForm.lastName.$touched">
+						<span ng-show="createUserForm.lastName.$error.required">Please enter a valid last name</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="userEmail" class="sr-only">EMAIL ADDRESS</label> <input ng-model="account.email" name="userEmail" type="email" id="userEmail" class="form-control" placeholder="EMAIL ADDRESS *"
+						required>
+					<div ng-show="createUserForm.$submitted || createUserForm.userEmail.$touched">
+						<span ng-show="createUserForm.userEmail.$error.required || createUserForm.userEmail.$error.email">Please enter a valid email address</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="userPassword" class="sr-only">PASSWORD</label> <input ng-model="account.password" name="userPassword" type="password" id="userPassword" class="form-control" placeholder="PASSWORD *"
+						required>
+					<div ng-show="createUserForm.$submitted || createUserForm.userPassword.$touched">
+						<span ng-show="createUserForm.userPassword.$error.required">Please enter your correct password</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="userConfirmPassword" class="sr-only">CONFIRM PASSWORD</label> <input ng-model="account.confirmPassword" name="userConfirmPassword" type="password" id="userConfirmPassword"
+						class="form-control" placeholder="CONFIRM PASSWORD *" required>
+					<div ng-show="createUserForm.$submitted || createUserForm.userConfirmPassword.$touched">
+						<span ng-show="createUserForm.userConfirmPassword.$error.required">Please confirm your password</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="userGender" class="sr-only">GENDER</label> <select ng-model="account.gender" ng-options="gender for gender in genders" id="userGender" name="userGender" class="form-control" required>
+						<option value="">SELECT GENDER *</option>
+					</select>
+					<div ng-show="createUserForm.$submitted || createUserForm.userGender.$touched">
+						<span ng-show="createUserForm.userGender.$error.required">Please select a gender</span>
+					</div>
+				</div>
+				<button class="btn btn-primary btn-block" type="submit">CREATE ACCOUNT</button>
+			</form>
+		</div>
+	</div>
+</div>
