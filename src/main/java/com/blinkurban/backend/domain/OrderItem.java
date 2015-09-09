@@ -38,7 +38,7 @@ public class OrderItem{
 	public void setQuantity(int quantity){
 		this.quantity = quantity;
 	}
-	public double getQuantity(){
+	public int getQuantity(){
 		return quantity;
 	}
 	
@@ -52,5 +52,12 @@ public class OrderItem{
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	public Key<Item> getItemIdKey(){
 		return itemIdKey;
+	}
+	public Size getSize(){
+		return size;
+	}
+	
+	public Color getColor(){
+		return color;
 	}
 }

@@ -2,5 +2,6 @@ package com.blinkurban.backend.domain;
 
 public enum Gender{
 	Male,
-	Female
+	Female,
+	None
 }

@@ -11,11 +11,13 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.blinkurban.backend.Constants;
 import com.blinkurban.backend.domain.Debug;
 import com.blinkurban.backend.domain.Item;
+import com.blinkurban.backend.domain.ItemMetric;
 import com.blinkurban.backend.domain.Model;
 import com.blinkurban.backend.domain.Order;
 import com.blinkurban.backend.domain.User;
 import com.blinkurban.backend.form.ItemForm;
 import com.blinkurban.backend.form.ItemIDForm;
+import com.blinkurban.backend.form.ItemMetricForm;
 import com.blinkurban.backend.form.ModelForm;
 import com.blinkurban.backend.form.OrderForm;
 import com.blinkurban.backend.form.UserForm;
@@ -54,8 +56,13 @@ public class BlinkUrbanAPI {
 	}
 	
 	@ApiMethod(name = "createOrder", path = "newOrder", httpMethod = HttpMethod.POST)
-	public Order createOrder(OrderForm orderForm){
+	public Order createOrder(OrderForm orderForm) throws BadRequestException{
 		return Orders.createOrder(orderForm);
+	}
+	
+	@ApiMethod(name = "addItem", path = "addItems", httpMethod = HttpMethod.POST)
+	public ItemMetric addItem(ItemMetricForm metricForm){
+		return Items.addItems(metricForm);
 	}
 	
 /* 

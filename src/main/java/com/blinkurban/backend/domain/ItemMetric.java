@@ -16,7 +16,7 @@ public class ItemMetric{
 	
 	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	@Index
-	Key<Item> itemID;
+	Key<Item> itemId;
 	
 	@ApiResourceProperty
 	@Index
@@ -27,7 +27,12 @@ public class ItemMetric{
 	Color color;
 	
 	public ItemMetric(){}
-	
+	public ItemMetric(Long itemId, Size size, Color color, long count){
+		this.itemId = Key.create(Item.class,itemId);
+		this.size = size;
+		this.color = color;
+		this.count = count;
+	}
 	public Color getColor(){
 		return color;
 	}
@@ -36,5 +41,9 @@ public class ItemMetric{
 	}
 	public long getCount(){
 		return count;
+	}
+	
+	public void setCount(long count){
+		this.count = count;
 	}
 }

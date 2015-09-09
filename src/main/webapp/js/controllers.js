@@ -79,7 +79,7 @@ blinkUrbanApp.controllers.controller('RegistrationCtrl', function($scope, $rootS
 	$scope.init = function(){
 		$scope.loading = false;
 		$scope.account = {};
-		$scope.genders = ["Male", "Female"];
+		$scope.genders = ["Male", "Female", "None"];
 	};
 	
 	$scope.createUser = function(account){
