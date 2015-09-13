@@ -1,9 +1,9 @@
 package com.blinkurban.backend.spi;
 
 import static com.blinkurban.backend.service.OfyService.ofy;
+import static com.blinkurban.backend.service.OfyService.factory;
 
 import java.util.List;
-
 import com.blinkurban.backend.domain.Item;
 import com.blinkurban.backend.domain.ItemMetric;
 import com.blinkurban.backend.form.ItemForm;
@@ -13,7 +13,8 @@ import com.googlecode.objectify.Key;
 
 public class Items {
 	public static Item createItem(ItemForm item) {
-		Item i = new Item(item.getName(), item.getDescription(), item.getGender(), item.getPrice());
+		Key<Item> key = factory().allocateId(Item.class);
+		Item i = new Item(key.getId(), item.getName(), item.getDescription(), item.getGender(), item.getPrice());
 		ofy().save().entity(i).now();
 		return i;
 	}
