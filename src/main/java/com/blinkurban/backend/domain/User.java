@@ -12,9 +12,6 @@ public class User {
 	private String salt;
 	private String firstName;
 	private String lastName;
-	
-	@ApiResourceProperty
-	@Index 
 	private Gender gender;
 	
 	public User(String email, byte[] password, String firstName, String lastName, Gender gender, String salt){
