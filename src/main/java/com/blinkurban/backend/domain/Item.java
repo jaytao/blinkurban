@@ -18,6 +18,7 @@ public class Item {
 	@Index
 	private String name;
 	
+	@Index
 	private String description;
 	
 	@Index

@@ -19,7 +19,8 @@ public class Order{
 	private double price;
 	
 	public Order(){}
-	public Order(String userId, List<OrderItem> orderItems){
+	public Order(final long id, String userId, List<OrderItem> orderItems){
+		this.id = id;
 		this.userId = userId;
 		this.userIdKey = Key.create(User.class, userId);
 		this.orderItems = orderItems;

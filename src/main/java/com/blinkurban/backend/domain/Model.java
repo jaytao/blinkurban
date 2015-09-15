@@ -13,7 +13,8 @@ public class Model{
 	
 	public Model(){}
 	
-	public Model(String name, String description, int height, int weight){
+	public Model(final long id, String name, String description, int height, int weight){
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.height = height;

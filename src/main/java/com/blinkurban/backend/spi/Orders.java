@@ -9,13 +9,15 @@ import com.google.api.server.spi.response.BadRequestException;
 import com.googlecode.objectify.Key;
 
 import static com.blinkurban.backend.service.OfyService.ofy;
+import static com.blinkurban.backend.service.OfyService.factory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Orders {
 	public static Order createOrder(OrderForm orderForm) throws BadRequestException {
-		Order o = new Order(orderForm.getUserId(), orderForm.getOrderItems());
+		Key<Order> key = factory().allocateId(Order.class);
+		Order o = new Order(key.getId(), orderForm.getUserId(), orderForm.getOrderItems());
 		ofy().save().entities(o.getOrderItems()).now();
 
 		double totalPrice = 0.0;

@@ -18,6 +18,7 @@ import com.blinkurban.backend.domain.User;
 import com.blinkurban.backend.form.ItemForm;
 import com.blinkurban.backend.form.ItemIDForm;
 import com.blinkurban.backend.form.ItemMetricForm;
+import com.blinkurban.backend.form.ItemSearchForm;
 import com.blinkurban.backend.form.ModelForm;
 import com.blinkurban.backend.form.OrderForm;
 import com.blinkurban.backend.form.UserForm;
@@ -65,6 +66,10 @@ public class BlinkUrbanAPI {
 		return Items.addItems(metricForm);
 	}
 	
+	@ApiMethod(name = "searchItem", path = "searchItem", httpMethod = HttpMethod.POST)
+	public List<Item> searchItem(ItemSearchForm searchForm){
+		return Items.searchItem(searchForm.getSearchField());
+	}
 /* 
  #################### Test Calls #####################
 */

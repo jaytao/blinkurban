@@ -3,12 +3,22 @@ package com.blinkurban.backend.spi;
 import static com.blinkurban.backend.service.OfyService.ofy;
 import static com.blinkurban.backend.service.OfyService.factory;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.blinkurban.backend.domain.Item;
 import com.blinkurban.backend.domain.ItemMetric;
 import com.blinkurban.backend.form.ItemForm;
 import com.blinkurban.backend.form.ItemIDForm;
 import com.blinkurban.backend.form.ItemMetricForm;
+import com.google.appengine.api.search.Document;
+import com.google.appengine.api.search.Field;
+import com.google.appengine.api.search.IndexSpec;
+import com.google.appengine.api.search.Index;
+import com.google.appengine.api.search.SearchServiceFactory;
+import com.google.appengine.api.search.PutException;
+import com.google.appengine.api.search.Results;
+import com.google.appengine.api.search.ScoredDocument;
+import com.google.appengine.api.search.StatusCode;
 import com.googlecode.objectify.Key;
 
 public class Items {
@@ -16,6 +26,16 @@ public class Items {
 		Key<Item> key = factory().allocateId(Item.class);
 		Item i = new Item(key.getId(), item.getName(), item.getDescription(), item.getGender(), item.getPrice());
 		ofy().save().entity(i).now();
+		
+		//Create document from Item
+		Document doc = Document.newBuilder()
+				.addField(Field.newBuilder().setName("itemId").setText("" + key.getId()))
+				.addField(Field.newBuilder().setName("itemname").setText(i.getName()))
+				.addField(Field.newBuilder().setName("description").setText(i.getDescription()))
+				.build();
+	    
+	    getIndex().put(doc);
+	   
 		return i;
 	}
 
@@ -31,7 +51,8 @@ public class Items {
 		
 		//Create if not
 		if (list.isEmpty()) {
-			ItemMetric im = new ItemMetric(metricForm.getItemId(), metricForm.getSize(), metricForm.getColor(),
+			Key<ItemMetric> key = factory().allocateId(ItemMetric.class);
+			ItemMetric im = new ItemMetric(key.getId(), metricForm.getItemId(), metricForm.getSize(), metricForm.getColor(),
 					metricForm.getCount());
 			ofy().save().entity(im).now();
 			return im;
@@ -42,5 +63,23 @@ public class Items {
 			ofy().save().entity(im).now();
 			return im;
 		}
+	}
+	
+	public static List<Item> searchItem(String search){
+		//String queryString = "itemname:" + search + " OR description:" + search;
+		String queryString = search;
+		List<Item> itemList = new ArrayList<Item>();
+	    Results<ScoredDocument> results = getIndex().search(queryString);
+	    for (ScoredDocument document : results) {
+	        Key<Item> id = Key.create(Item.class, Long.parseLong(document.getOnlyField("itemId").getText()));
+	        itemList.add(ofy().load().key(id).now());
+	    }
+	    return itemList;
+	}
+	
+	public static Index getIndex(){
+		IndexSpec indexSpec = IndexSpec.newBuilder().setName("itemindex").build(); 
+	    return SearchServiceFactory.getSearchService().getIndex(indexSpec);
+	   
 	}
 }

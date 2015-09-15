@@ -27,7 +27,8 @@ public class ItemMetric{
 	Color color;
 	
 	public ItemMetric(){}
-	public ItemMetric(Long itemId, Size size, Color color, long count){
+	public ItemMetric(final long id, Long itemId, Size size, Color color, long count){
+		this.id = id;
 		this.itemId = Key.create(Item.class,itemId);
 		this.size = size;
 		this.color = color;

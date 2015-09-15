@@ -24,7 +24,8 @@ public class OrderItem{
 	
 	public OrderItem(){}
 	
-	public OrderItem(Long itemId, int quantity){
+	public OrderItem(final long id, Long itemId, int quantity){
+		this.id = id;
 		this.itemId = itemId;
 		this.itemIdKey = Key.create(Item.class, itemId);
 		this.quantity = quantity;
