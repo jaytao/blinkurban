@@ -2,6 +2,9 @@ package com.blinkurban.backend.spi;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
@@ -38,7 +41,8 @@ public class BlinkUrbanAPI {
 
 	@ApiMethod(name = "login", path = "login", httpMethod = HttpMethod.POST)
 	public User login(UserLoginForm loginForm) throws BadRequestException, UnauthorizedException {
-		return Login.login(loginForm);
+		User user = Login.login(loginForm);
+		return user;
 	}
 
 	@ApiMethod(name = "createItem", path = "newItem", httpMethod = HttpMethod.POST)

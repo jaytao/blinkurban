@@ -2,6 +2,8 @@ package com.blinkurban.backend.spi;
 
 import static com.blinkurban.backend.service.OfyService.ofy;
 
+import java.security.SecureRandom;
+
 import com.blinkurban.backend.Constants;
 import com.blinkurban.backend.domain.User;
 import com.blinkurban.backend.form.UserForm;
@@ -13,28 +15,28 @@ import com.googlecode.objectify.Key;
 
 public class Register {
 	public static User register(UserForm userForm) throws BadRequestException, UnauthorizedException {
-		// TODO check required fields
-		// TODO add a transaction
-		// TODO add authentication oauth or oauth2?
-
 		// Validations
 		if (!Regex.email(userForm.getEmail())) {
-			// Save the entity in the datastore
-			// throw new BadRequestException("gID = " + userForm.getGender());
 			throw new BadRequestException("Invalid email address");
 		}
 		if (!userForm.getConfirmPassword().equals(userForm.getPassword())) {
 			throw new BadRequestException("Passwords do not match");
+		}
+		if(userForm.getFirstName() == null || userForm.getFirstName().isEmpty()){
+			throw new BadRequestException("First name is required");
+		}
+		if(userForm.getLastName() == null || userForm.getLastName().isEmpty()){
+			throw new BadRequestException("Last name is required");
 		}
 
 		// check if the provided email address already exist
 		User user = ofy().load().key(Key.create(User.class, userForm.getEmail())).now();
 		if (user == null) {
 			// create a new user
-			// TODO hash and salt password
-
-			user = new User(userForm.getEmail(), Crypto.SHA256(Constants.SALT + userForm.getPassword()),
-					userForm.getFirstName(), userForm.getLastName(), userForm.getGender(), Constants.SALT);
+			SecureRandom random = new SecureRandom();
+			byte[] salt = random.generateSeed(32);
+			user = new User(userForm.getEmail(), Crypto.SHA256(salt + userForm.getPassword()),
+					userForm.getFirstName(), userForm.getLastName(), userForm.getGender(), salt);
 
 			ofy().save().entity(user).now();
 		} else {
