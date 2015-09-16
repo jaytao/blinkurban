@@ -9,12 +9,12 @@ import com.googlecode.objectify.annotation.Index;
 public class User {
 	@Id String email;
 	private byte[] password;
-	private String salt;
+	private byte[] salt;
 	private String firstName;
 	private String lastName;
 	private Gender gender;
 	
-	public User(String email, byte[] password, String firstName, String lastName, Gender gender, String salt){
+	public User(String email, byte[] password, String firstName, String lastName, Gender gender, byte[] salt){
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
