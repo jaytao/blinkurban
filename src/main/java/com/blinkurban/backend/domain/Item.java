@@ -27,13 +27,17 @@ public class Item {
 	@Index
 	private Gender gender;
 
+	@Index
+	private Category category;
+	
 	private Item(){}
-	public Item(final long id, String name, String description, String gender, double price){
+	public Item(final long id, String name, String description, Gender gender, Category category, double price){
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.gender = Gender.valueOf(gender);
+		this.gender = gender;
 		this.price = price;
+		this.category = category;
 	}
 	public String getName(){
 		return name;
@@ -49,4 +53,8 @@ public class Item {
 	public double getPrice(){
 		return price;
 	}
+	public Category getCategory(){
+		return category;
+	}
+	
 }
