@@ -2,6 +2,7 @@ package com.blinkurban.backend.spi;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,6 +37,8 @@ public class BlinkUrbanAPI {
 
 	@ApiMethod(name = "createUser", path = "user", httpMethod = HttpMethod.POST)
 	public User createUser(UserForm userForm) throws UnauthorizedException, BadRequestException {
+		//Cookie cookie = new Cookie("test", "123");
+		//res.addCookie(cookie);
 		return Register.register(userForm);
 	}
 

@@ -30,12 +30,13 @@ public class Register {
 		}
 
 		// check if the provided email address already exist
-		User user = ofy().load().key(Key.create(User.class, userForm.getEmail())).now();
+		User user = ofy().load().key(Key.create(User.class, userForm.getEmail().toLowerCase())).now();
 		if (user == null) {
 			// create a new user
 			SecureRandom random = new SecureRandom();
 			byte[] salt = random.generateSeed(32);
-			user = new User(userForm.getEmail(), Crypto.SHA256(salt + userForm.getPassword()),
+			//convert email to lowercase characters before storing data
+			user = new User(userForm.getEmail().toLowerCase(), Crypto.SHA256(salt + userForm.getPassword()),
 					userForm.getFirstName(), userForm.getLastName(), userForm.getGender(), salt);
 
 			ofy().save().entity(user).now();
