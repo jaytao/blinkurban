@@ -12,16 +12,16 @@ import com.googlecode.objectify.Key;
 public class Login{
 	
 	public static User login(UserLoginForm loginForm) throws BadRequestException, UnauthorizedException{
+		//validate password
 		if (!Regex.email(loginForm.getEmail())){
-			// Save the entity in the datastore
-			//throw new BadRequestException("gID = " + userForm.getGender());
 			throw new BadRequestException("Invalid email address");
 		}
-		User user = ofy().load().key(Key.create(User.class, loginForm.getEmail())).now();
+		//get user from db if exist
+		User user = ofy().load().key(Key.create(User.class, loginForm.getEmail().toLowerCase())).now();
 		if (user == null){
 			throw new UnauthorizedException("Email or Password incorrect.");
 		}
-		else if (!user.checkPassword(loginForm.getPassword())){
+		if (!user.checkPassword(loginForm.getPassword())){
 			throw new UnauthorizedException("Email or Password incorrect.");
 		}
 		else{
