@@ -5,11 +5,14 @@ import static com.blinkurban.backend.service.OfyService.factory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.blinkurban.backend.domain.Category;
 import com.blinkurban.backend.domain.Item;
 import com.blinkurban.backend.domain.ItemMetric;
 import com.blinkurban.backend.form.ItemForm;
 import com.blinkurban.backend.form.ItemIDForm;
 import com.blinkurban.backend.form.ItemMetricForm;
+import com.blinkurban.backend.form.ItemSearchForm;
 import com.google.appengine.api.search.Document;
 import com.google.appengine.api.search.Field;
 import com.google.appengine.api.search.IndexSpec;
@@ -71,15 +74,25 @@ public class Items {
 		}
 	}
 	
-	public static List<Item> searchItem(String search){
+	//If only category is defined as search field
+	public static List<Item> searchItem(List<Category> categoryList){
+		List<Item> list = ofy().load().type(Item.class).filter("category in", categoryList).limit(25).list();
+		return list;
+	}
+	
+	//If search string is defined. Will filter based on category list passed in
+	public static List<Item> searchItem(ItemSearchForm searchForm){
 		List<Long> idList = new ArrayList<Long>();
-		
+		String search = searchForm.getSearchField();
+		List<Category> categoryList = searchForm.getCategoryList();
 		//Search based on name
 		String queryString = "name:" + search;
 		Query query = Query.newBuilder().setOptions(getQueryOptions()).build(queryString);
 	    Results<ScoredDocument> results = getIndex().search(query);
 	    for (ScoredDocument document : results) {
-	        idList.add(Long.parseLong(document.getOnlyField("id").getText()));
+	    	if (categoryList == null || categoryList.contains(Category.valueOf(document.getOnlyField("category").getText()))){
+	    		idList.add(Long.parseLong(document.getOnlyField("id").getText()));
+	    	}
 	    }
 	    
 	    if (idList.size() < 25){
@@ -91,8 +104,10 @@ public class Items {
 		    for (ScoredDocument document : results) {
 		    	Long resultId = Long.parseLong(document.getOnlyField("id").getText());
 		    	if (!idList.contains(resultId)){
-		    		searchLimit--;
-		    		idList.add(resultId);
+		    		if (categoryList == null || categoryList.contains(Category.valueOf(document.getOnlyField("category").getText()))){
+			    		idList.add(resultId);
+			    		searchLimit--;
+			    	}
 		    	}
 		        if (searchLimit == 0){
 		        	break;

@@ -72,7 +72,10 @@ public class BlinkUrbanAPI {
 	
 	@ApiMethod(name = "searchItem", path = "searchItem", httpMethod = HttpMethod.POST)
 	public List<Item> searchItem(ItemSearchForm searchForm){
-		return Items.searchItem(searchForm.getSearchField());
+		if (searchForm.getSearchField() == null){
+			return Items.searchItem(searchForm.getCategoryList());
+		}
+		return Items.searchItem(searchForm);
 	}
 /* 
  #################### Test Calls #####################
